@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Layout, Menu } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './App.css';
@@ -8,8 +8,13 @@ const { SubMenu } = Menu;
 const { Header, Sider, Content } = Layout;
 
 const App = () => {
-  const data = api.fetchList(); // dummy data를 반환하는 API
-  console.log(data);
+  
+  useEffect(() => {
+    api.fetchList().then((data) => {
+      console.log('data', data);
+    });
+  }, []);
+  
   
   return (
     <div className="App">
