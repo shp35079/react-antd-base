@@ -10,7 +10,7 @@ function makeDummyData(count: number) {
       name: firstName,
       email: faker.internet.email(firstName),
       company: faker.company.companyName(),
-      title: faker.name.title(),
+      jobTitle: faker.name.jobTitle(),
     });
   }
   return dummyData;
