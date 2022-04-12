@@ -1,12 +1,12 @@
 import { Menu } from "antd";
-import Sider from "antd/lib/layout/Sider";
+import { Layout } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
 import React from "react";
 import styled from "styled-components";
 
 const MainSider = () => {
   return (
-    <Sider width={256}>
+    <Layout.Sider width={256}>
       <CompanyBox>
         <CompanyLogo>주</CompanyLogo>
         <span>주식회사 벨코즈</span>
@@ -26,7 +26,7 @@ const MainSider = () => {
           <Menu.Item key="4">option4</Menu.Item>
         </SubMenu>
       </Menu>
-    </Sider>
+    </Layout.Sider>
   );
 };
 

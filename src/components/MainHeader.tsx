@@ -1,4 +1,4 @@
-import { Header } from "antd/lib/layout/layout";
+import { Layout } from "antd";
 import React from "react";
 import styled from "styled-components";
 
@@ -20,7 +20,7 @@ const MainHeader = () => {
   );
 };
 
-const Wrapper = styled(Header)`
+const Wrapper = styled(Layout.Header)`
   display: flex;
   justify-content: space-between;
   align-items: center;
