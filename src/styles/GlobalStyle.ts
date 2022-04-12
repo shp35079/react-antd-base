@@ -6,5 +6,10 @@ export default createGlobalStyle`
     
     * {
         box-sizing: border-box;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    span {
+        font-family: 'Noto Sans KR', sans-serif;
     }
 `;
