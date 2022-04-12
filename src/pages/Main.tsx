@@ -6,7 +6,7 @@ import MainContent from "../components/MainContent";
 
 const Main = () => {
   return (
-    <Layout>
+    <Layout style={{ height: "100vh" }}>
       <MainHeader />
       <Layout>
         <MainSider />
