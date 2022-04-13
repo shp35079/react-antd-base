@@ -1,17 +1,12 @@
-import { Divider, Layout, PageHeader, Button, Table, Popover } from "antd";
+import { Divider, Layout, PageHeader, Button, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { TABLE_COLUMN } from "../constances";
 import { fetchList } from "../lib/api";
 import { UserListType } from "../lib/interfaces";
 
 const MainContent = () => {
   const [users, setUsers] = useState<UserListType[]>([]);
-    <MenuBox>
-      <p>보기</p>
-      <p>수정</p>
-      <p>삭제</p>
-    </MenuBox>
-  );
 
   useEffect(() => {
     fetchList()
@@ -22,37 +17,6 @@ const MainContent = () => {
         throw err;
       });
   }, []);
-      dataIndex: "affiliation",
-      key: "affiliation",
-      sorter: true,
-    },
-    {
-      title: "이메일",
-      dataIndex: "email",
-      key: "email",
-      sorter: true,
-    },
-    {
-      title: "직함",
-      dataIndex: "position",
-      key: "position",
-    },
-    {
-      title: "",
-      dataIndex: "menu",
-      key: "menu",
-      render: () => (
-        <ImageBox>
-          <Popover placement="bottomRight" content={content} trigger="click">
-            <img
-              src="https://ivandjorgon.github.io/youtube-replica/assets/images/dots.png"
-              alt=""
-            />
-          </Popover>
-        </ImageBox>
-      ),
-    },
-  ];
 
   return (
     <Wrapper>
@@ -64,15 +28,14 @@ const MainContent = () => {
         </Button>
       </ButtonWrapper>
       <Table
-        columns={columns}
+        columns={TABLE_COLUMN}
         dataSource={users}
         bordered
         pagination={{
           position: ["bottomCenter"],
           total: 100,
-          defaultPageSize: 20,
-          defaultCurrent: 1,
         }}
+        scroll={{ y: 275 }}
       />
     </Wrapper>
   );
@@ -99,25 +62,6 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 40px 0;
-`;
-
-const ImageBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
-
-const MenuBox = styled.div`
-  width: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  & > p {
-    font-family: "Noto Sans KR";
-    cursor: pointer;
-  }
 `;
 
 export default MainContent;
