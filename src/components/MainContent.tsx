@@ -1,9 +1,11 @@
 import { Divider, Layout, PageHeader, Button, Table, Popover } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { fetchList } from "../lib/api";
+import { UserListType } from "../lib/interfaces";
 
 const MainContent = () => {
-  const content = (
+  const [users, setUsers] = useState<UserListType[]>([]);
     <MenuBox>
       <p>보기</p>
       <p>수정</p>
@@ -11,15 +13,15 @@ const MainContent = () => {
     </MenuBox>
   );
 
-  const columns = [
-    {
-      title: "이름",
-      dataIndex: "name",
-      key: "name",
-      sorter: true,
-    },
-    {
-      title: "소속",
+  useEffect(() => {
+    fetchList()
+      .then((res) => {
+        setUsers(res as UserListType[]);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
       dataIndex: "affiliation",
       key: "affiliation",
       sorter: true,
@@ -52,30 +54,6 @@ const MainContent = () => {
     },
   ];
 
-  const data = [
-    {
-      key: 1,
-      name: "김성현",
-      affiliation: "주식회사 쿼타북",
-      email: "demo@quotabook.com",
-      position: "대표이사",
-    },
-    {
-      key: 2,
-      name: "박성현",
-      affiliation: "주식회사 쿼타북",
-      email: "demo@quotabook.com",
-      position: "대표이사",
-    },
-    {
-      key: 3,
-      name: "박성현",
-      affiliation: "주식회사 쿼타북",
-      email: "demo@quotabook.com",
-      position: "대표이사",
-    },
-  ];
-
   return (
     <Wrapper>
       <PageHeader title="주주 및 이해관계자" />
@@ -87,7 +65,7 @@ const MainContent = () => {
       </ButtonWrapper>
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={users}
         bordered
         pagination={{
           position: ["bottomCenter"],
