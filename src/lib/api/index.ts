@@ -16,7 +16,7 @@ function makeDummyData(count: number) {
   return dummyData;
 }
 
-const DUMMY_COUNT = 20;
+const DUMMY_COUNT = 100;
 const dummyData = makeDummyData(DUMMY_COUNT);
 const TIMEOUT = 300;
 
