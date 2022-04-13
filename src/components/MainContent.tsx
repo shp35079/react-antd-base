@@ -120,7 +120,7 @@ const Wrapper = styled(Layout.Content)`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  margin: 40px 0;
 `;
 
 const ImageBox = styled.div`
