@@ -1,8 +1,8 @@
 import { Form, Input, Modal, Button } from "antd";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import styled from "styled-components";
 import { FORM_ITEM_INFO } from "../constances";
-import { create } from "../lib/api";
+import { createUser, UserDispatchContext } from "../contexts";
 import { UserListType } from "../lib/interfaces";
 
 interface Props {
@@ -17,28 +17,21 @@ const CreateUserModal = ({
   modalType,
 }: Props) => {
   const [form] = Form.useForm();
+  const dispatch = useContext(UserDispatchContext);
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
   const onFinish = (values: UserListType) => {
-    create(values)
+    createUser(dispatch, values)
       .then((res) => {
         handleCancel();
-        form.resetFields();
       })
       .catch((err) => {
         throw err;
       });
   };
-
-  //   useEffect(() => {
-  //     if (modalType === "modify") {
-  //       form.setFieldsValue({});
-  //     }
-  //   }, []);
-  // 수정 로직
 
   return (
     <UserModal
