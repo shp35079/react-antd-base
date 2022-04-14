@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { TABLE_COLUMN } from "../constances";
 import { fetchList } from "../lib/api";
 import { UserListType } from "../lib/interfaces";
+import CreateUserModal from "./CreateUserModal";
 
 const MainContent = () => {
   const [users, setUsers] = useState<UserListType[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     fetchList()
@@ -23,7 +25,11 @@ const MainContent = () => {
       <PageHeader title="주주 및 이해관계자" />
       <Divider />
       <ButtonWrapper>
-        <Button type="primary" size="large">
+        <Button
+          onClick={() => setIsModalVisible(true)}
+          type="primary"
+          size="large"
+        >
           ＋ 추가하기
         </Button>
       </ButtonWrapper>
@@ -36,6 +42,11 @@ const MainContent = () => {
           total: 100,
         }}
         scroll={{ y: 275 }}
+      />
+      <CreateUserModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        modalType="add"
       />
     </Wrapper>
   );
