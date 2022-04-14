@@ -4,4 +4,5 @@ export interface UserListType {
   email: string;
   company: string;
   jobTitle: string;
+  key?: number;
 }
