@@ -1,6 +1,7 @@
 import { Form, Input, Modal, Button } from "antd";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import styled from "styled-components";
+import { FORM_ITEM_INFO } from "../constances";
 import { create } from "../lib/api";
 import { UserListType } from "../lib/interfaces";
 
@@ -55,38 +56,19 @@ const CreateUserModal = ({
         wrapperCol={{ span: 16 }}
         onFinish={onFinish}
       >
-        <Form.Item
-          colon={false}
-          label="이름"
-          name="name"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          colon={false}
-          label="소속"
-          name="company"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          colon={false}
-          label="이메일"
-          name="email"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          colon={false}
-          label="직함"
-          name="jobTitle"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
+        {FORM_ITEM_INFO.map((ele) => {
+          return (
+            <Form.Item
+              key={ele.name}
+              colon={false}
+              label={ele.label}
+              name={ele.name}
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          );
+        })}
         <Form.Item wrapperCol={{ offset: 18 }}>
           <ButtonWrapper>
             <Button htmlType="button" onClick={handleCancel}>

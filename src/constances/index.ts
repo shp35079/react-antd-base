@@ -32,3 +32,22 @@ export const TABLE_COLUMN = [
     render: () => PopoverButton(),
   },
 ];
+
+export const FORM_ITEM_INFO = [
+  {
+    label: "이름",
+    name: "name",
+  },
+  {
+    label: "소속",
+    name: "company",
+  },
+  {
+    label: "이메일",
+    name: "email",
+  },
+  {
+    label: "직함",
+    name: "jobTitle",
+  },
+];
