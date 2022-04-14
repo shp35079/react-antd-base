@@ -1,21 +1,21 @@
 import { Divider, Layout, PageHeader, Button, Table } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { TABLE_COLUMN } from "../constances";
-import { fetchList } from "../lib/api";
-import { UserListType } from "../lib/interfaces";
+import {
+  getUserList,
+  UserDispatchContext,
+  UserStateContext,
+} from "../contexts";
+import CreateUserModal from "./CreateUserModal";
 
 const MainContent = () => {
-  const [users, setUsers] = useState<UserListType[]>([]);
+  const { userList } = useContext(UserStateContext);
+  const dispatch = useContext(UserDispatchContext);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    fetchList()
-      .then((res) => {
-        setUsers(res as UserListType[]);
-      })
-      .catch((err) => {
-        throw err;
-      });
+    getUserList(dispatch);
   }, []);
 
   return (
@@ -23,19 +23,28 @@ const MainContent = () => {
       <PageHeader title="주주 및 이해관계자" />
       <Divider />
       <ButtonWrapper>
-        <Button type="primary" size="large">
+        <Button
+          onClick={() => setIsModalVisible(true)}
+          type="primary"
+          size="large"
+        >
           ＋ 추가하기
         </Button>
       </ButtonWrapper>
       <Table
         columns={TABLE_COLUMN}
-        dataSource={users}
+        dataSource={userList}
         bordered
         pagination={{
           position: ["bottomCenter"],
-          total: 100,
+          total: userList.length,
         }}
         scroll={{ y: 275 }}
+      />
+      <CreateUserModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        modalType="add"
       />
     </Wrapper>
   );
