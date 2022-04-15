@@ -1,4 +1,5 @@
 import PopoverButton from "../components/PopoverButton";
+import { UserListType } from "../lib/interfaces";
 
 export const TABLE_COLUMN = [
   {
@@ -29,7 +30,7 @@ export const TABLE_COLUMN = [
     title: "",
     dataIndex: "menu",
     key: "menu",
-    render: () => PopoverButton(),
+    render: (row: any, record: UserListType) => <PopoverButton data={record} />,
   },
 ];
 
@@ -37,17 +38,21 @@ export const FORM_ITEM_INFO = [
   {
     label: "이름",
     name: "name",
+    rules: [{ required: true }],
   },
   {
     label: "소속",
     name: "company",
+    rules: [{ required: true }],
   },
   {
     label: "이메일",
     name: "email",
+    rules: [{ required: true, type: "email" }],
   },
   {
     label: "직함",
     name: "jobTitle",
+    rules: [{ required: true }],
   },
 ];

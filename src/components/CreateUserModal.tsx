@@ -1,4 +1,5 @@
-import { Form, Input, Modal, Button } from "antd";
+import { Form, Input, Modal, Button, message } from "antd";
+import { Rule } from "antd/lib/form";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import styled from "styled-components";
 import { FORM_ITEM_INFO } from "../constances";
@@ -27,6 +28,7 @@ const CreateUserModal = ({
     createUser(dispatch, values)
       .then((res) => {
         handleCancel();
+        message.success("유저가 성공적으로 추가되었습니다.");
       })
       .catch((err) => {
         throw err;
@@ -56,7 +58,7 @@ const CreateUserModal = ({
               colon={false}
               label={ele.label}
               name={ele.name}
-              rules={[{ required: true }]}
+              rules={ele.rules as Rule[]}
             >
               <Input />
             </Form.Item>
