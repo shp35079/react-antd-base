@@ -1,6 +1,7 @@
-import { Modal } from "antd";
-import React, { Dispatch, SetStateAction } from "react";
+import { Descriptions, Modal } from "antd";
+import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import styled from "styled-components";
+import { getUser, UserDispatchContext, UserStateContext } from "../contexts";
 
 interface Props {
   isModalVisible: boolean;
@@ -8,6 +9,13 @@ interface Props {
 }
 
 const DetailUserModal = ({ isModalVisible, setIsModalVisible }: Props) => {
+  const { targetId, user } = useContext(UserStateContext);
+  const dispatch = useContext(UserDispatchContext);
+
+  useEffect(() => {
+    getUser(dispatch, targetId);
+  }, []);
+
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -20,7 +28,14 @@ const DetailUserModal = ({ isModalVisible, setIsModalVisible }: Props) => {
       centered
       onCancel={handleCancel}
       footer={null}
-    ></UserModal>
+    >
+      <Descriptions column={1} bordered>
+        <Descriptions.Item label="이름">{user.name}</Descriptions.Item>
+        <Descriptions.Item label="소속">{user.company}</Descriptions.Item>
+        <Descriptions.Item label="이메일">{user.email}</Descriptions.Item>
+        <Descriptions.Item label="직함">{user.jobTitle}</Descriptions.Item>
+      </Descriptions>
+    </UserModal>
   );
 };
 
@@ -31,6 +46,10 @@ const UserModal = styled(Modal)`
 
   .ant-modal-body {
     background-color: #f8f8f8;
+  }
+
+  td {
+    background-color: #fff;
   }
 `;
 
