@@ -7,7 +7,7 @@ import {
   UserDispatchContext,
   UserStateContext,
 } from "../contexts";
-import CreateUserModal from "./CreateUserModal";
+import FetchUserModal from "./FetchUserModal";
 
 const MainContent = () => {
   const { userList } = useContext(UserStateContext);
@@ -41,7 +41,7 @@ const MainContent = () => {
         }}
         scroll={{ y: 275 }}
       />
-      <CreateUserModal
+      <FetchUserModal
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
         modalType="add"

@@ -1,20 +1,19 @@
 import React, { createContext, Dispatch, useReducer } from "react";
-import { create, fetchById, fetchList } from "../lib/api";
+import { create, fetchById, fetchList, update } from "../lib/api";
 import { UserListType } from "../lib/interfaces";
 
 interface UserState {
   userList: UserListType[];
   user: UserListType;
-  targetId: number;
 }
 
 type Action =
   | { type: "GET_USER_LIST"; payload: UserListType[] }
-  | { type: "SET_TARGET_ID"; payload: number }
+  | { type: "SET_USER"; payload: UserListType }
   | { type: "GET_USER"; payload: UserListType }
   | { type: "CREATE_USER"; payload: UserListType }
-  | { type: "UPDATE_USER" }
-  | { type: "DELETE_USER" };
+  | { type: "UPDATE_USER"; payload: UserListType }
+  | { type: "DELETE_USER"; payload: number };
 
 const initialState: UserState = {
   userList: [],
@@ -25,7 +24,6 @@ const initialState: UserState = {
     company: "",
     jobTitle: "",
   },
-  targetId: -1,
 };
 
 export const UserStateContext = createContext<UserState>(initialState);
@@ -54,10 +52,10 @@ const UserReducer = (state: UserState, action: Action): UserState => {
         ...state,
         userList: action.payload,
       };
-    case "SET_TARGET_ID":
+    case "SET_USER":
       return {
         ...state,
-        targetId: action.payload,
+        user: action.payload,
       };
     case "GET_USER":
       return {
@@ -68,6 +66,15 @@ const UserReducer = (state: UserState, action: Action): UserState => {
       return {
         ...state,
         userList: [...state.userList, action.payload],
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        userList: state.userList.map((ele) =>
+          ele.id === state.user.id
+            ? { ...action.payload, id: state.user.id, key: state.user.id }
+            : ele
+        ),
       };
     default:
       throw new Error("Unhandled action");
@@ -119,6 +126,19 @@ export async function createUser(
     });
 }
 
-export function setTargetId(dispatch: Dispatch<Action>, id: number) {
-  dispatch({ type: "SET_TARGET_ID", payload: id });
+export function setUser(dispatch: Dispatch<Action>, user: UserListType) {
+  dispatch({ type: "SET_USER", payload: user });
+}
+
+export async function updateUser(
+  dispatch: Dispatch<Action>,
+  data: UserListType
+) {
+  await update(data)
+    .then((res) => {
+      dispatch({ type: "UPDATE_USER", payload: res as UserListType });
+    })
+    .catch((err) => {
+      throw err;
+    });
 }

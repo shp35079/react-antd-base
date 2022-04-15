@@ -9,11 +9,11 @@ interface Props {
 }
 
 const DetailUserModal = ({ isModalVisible, setIsModalVisible }: Props) => {
-  const { targetId, user } = useContext(UserStateContext);
+  const { user } = useContext(UserStateContext);
   const dispatch = useContext(UserDispatchContext);
 
   useEffect(() => {
-    getUser(dispatch, targetId);
+    getUser(dispatch, user.id);
   }, []);
 
   const handleCancel = () => {

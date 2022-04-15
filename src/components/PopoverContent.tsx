@@ -1,5 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import FetchUserModal from "./FetchUserModal";
 import DetailUserModal from "./DetailUserModal";
 
 interface Props {
@@ -7,23 +8,34 @@ interface Props {
 }
 
 const PopoverContent = ({ setIsPopoverVisible }: Props) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDeatilModalVisible, setIsDeatilModalVisible] = useState(false);
+  const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
 
-  const openModal = () => {
+  const openDetailModal = () => {
     setIsPopoverVisible(false);
-    setIsModalVisible(true);
+    setIsDeatilModalVisible(true);
+  };
+
+  const openUpdateModal = () => {
+    setIsPopoverVisible(false);
+    setIsUpdateModalVisible(true);
   };
 
   return (
     <>
       <MenuBox>
-        <p onClick={openModal}>보기</p>
-        <p>수정</p>
+        <p onClick={openDetailModal}>보기</p>
+        <p onClick={openUpdateModal}>수정</p>
         <p>삭제</p>
       </MenuBox>
       <DetailUserModal
-        isModalVisible={isModalVisible}
-        setIsModalVisible={setIsModalVisible}
+        isModalVisible={isDeatilModalVisible}
+        setIsModalVisible={setIsDeatilModalVisible}
+      />
+      <FetchUserModal
+        isModalVisible={isUpdateModalVisible}
+        setIsModalVisible={setIsUpdateModalVisible}
+        modalType="update"
       />
     </>
   );
