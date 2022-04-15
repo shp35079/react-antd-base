@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from "react";
-import { create, fetchById, fetchList } from "../lib/api";
+import { create, fetchById, fetchList, update } from "../lib/api";
 import { UserListType } from "../lib/interfaces";
 
 interface UserState {
@@ -13,8 +13,8 @@ type Action =
   | { type: "SET_TARGET_ID"; payload: number }
   | { type: "GET_USER"; payload: UserListType }
   | { type: "CREATE_USER"; payload: UserListType }
-  | { type: "UPDATE_USER" }
-  | { type: "DELETE_USER" };
+  | { type: "UPDATE_USER"; payload: UserListType }
+  | { type: "DELETE_USER"; payload: number };
 
 const initialState: UserState = {
   userList: [],
@@ -69,6 +69,15 @@ const UserReducer = (state: UserState, action: Action): UserState => {
         ...state,
         userList: [...state.userList, action.payload],
       };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        userList: state.userList.map((ele) =>
+          ele.id === state.targetId
+            ? { ...action.payload, id: state.targetId, key: state.targetId }
+            : ele
+        ),
+      };
     default:
       throw new Error("Unhandled action");
   }
@@ -121,4 +130,17 @@ export async function createUser(
 
 export function setTargetId(dispatch: Dispatch<Action>, id: number) {
   dispatch({ type: "SET_TARGET_ID", payload: id });
+}
+
+export async function updateUser(
+  dispatch: Dispatch<Action>,
+  data: UserListType
+) {
+  await update(data)
+    .then((res) => {
+      dispatch({ type: "UPDATE_USER", payload: res as UserListType });
+    })
+    .catch((err) => {
+      throw err;
+    });
 }

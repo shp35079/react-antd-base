@@ -1,9 +1,14 @@
 import { Form, Input, Modal, Button, message } from "antd";
 import { Rule } from "antd/lib/form";
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { FORM_ITEM_INFO } from "../constances";
-import { createUser, UserDispatchContext } from "../contexts";
+import {
+  createUser,
+  updateUser,
+  UserDispatchContext,
+  UserStateContext,
+} from "../contexts";
 import { UserListType } from "../lib/interfaces";
 
 interface Props {
@@ -18,21 +23,39 @@ const CreateUserModal = ({
   modalType,
 }: Props) => {
   const [form] = Form.useForm();
+  const { user } = useContext(UserStateContext);
   const dispatch = useContext(UserDispatchContext);
+
+  useEffect(() => {
+    if (modalType === "update") {
+      form.setFieldsValue(user);
+    }
+  });
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
   const onFinish = (values: UserListType) => {
-    createUser(dispatch, values)
-      .then((res) => {
-        handleCancel();
-        message.success("유저가 성공적으로 추가되었습니다.");
-      })
-      .catch((err) => {
-        throw err;
-      });
+    if (modalType === "add") {
+      createUser(dispatch, values)
+        .then((res) => {
+          handleCancel();
+          message.success("유저가 성공적으로 추가되었습니다.");
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } else {
+      updateUser(dispatch, values)
+        .then((res) => {
+          handleCancel();
+          message.success("유저기 성공적으로 수정되었습니다.");
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
   };
 
   return (
