@@ -1,5 +1,5 @@
 import { Popover } from "antd";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { setTargetId, UserDispatchContext } from "../contexts";
 import { UserListType } from "../lib/interfaces";
@@ -10,13 +10,20 @@ interface Props {
 }
 
 const PopoverButton = ({ data }: Props) => {
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const dispatch = useContext(UserDispatchContext);
+
+  const handleVisibleChange = (visible: boolean) => {
+    setIsPopoverVisible(visible);
+  };
 
   return (
     <Popover
       placement="bottomRight"
-      content={<PopoverContent />}
+      content={<PopoverContent setIsPopoverVisible={setIsPopoverVisible} />}
       trigger="click"
+      visible={isPopoverVisible}
+      onVisibleChange={handleVisibleChange}
     >
       <ImageBox onClick={() => setTargetId(dispatch, data.id)}>
         <img

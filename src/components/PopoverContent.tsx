@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import DetailUserModal from "./DetailUserModal";
 
-const PopoverContent = () => {
+interface Props {
+  setIsPopoverVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+const PopoverContent = ({ setIsPopoverVisible }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const openModal = () => {
+    setIsPopoverVisible(false);
     setIsModalVisible(true);
   };
 
