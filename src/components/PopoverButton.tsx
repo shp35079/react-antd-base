@@ -1,7 +1,7 @@
 import { Popover } from "antd";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { setTargetId, UserDispatchContext } from "../contexts";
+import { setUser, UserDispatchContext } from "../contexts";
 import { UserListType } from "../lib/interfaces";
 import PopoverContent from "./PopoverContent";
 
@@ -25,7 +25,7 @@ const PopoverButton = ({ data }: Props) => {
       visible={isPopoverVisible}
       onVisibleChange={handleVisibleChange}
     >
-      <ImageBox onClick={() => setTargetId(dispatch, data.id)}>
+      <ImageBox onClick={() => setUser(dispatch, data)}>
         <img
           src="https://ivandjorgon.github.io/youtube-replica/assets/images/dots.png"
           alt=""
