@@ -30,7 +30,7 @@ const CreateUserModal = ({
     if (modalType === "update") {
       form.setFieldsValue(user);
     }
-  });
+  }, []);
 
   const handleCancel = () => {
     setIsModalVisible(false);
