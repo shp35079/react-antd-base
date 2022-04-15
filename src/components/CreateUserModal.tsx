@@ -34,19 +34,17 @@ const CreateUserModal = ({
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    if (modalType === "add") {
-      form.resetFields();
-    } else {
-      form.setFieldsValue(user);
-    }
+    if (modalType === "add") form.resetFields();
+    else form.setFieldsValue(user);
   };
 
   const onFinish = (values: UserListType) => {
     if (modalType === "add") {
       createUser(dispatch, values)
         .then((res) => {
-          handleCancel();
+          setIsModalVisible(false);
           message.success("유저가 성공적으로 추가되었습니다.");
+          form.resetFields();
         })
         .catch((err) => {
           throw err;
@@ -54,8 +52,8 @@ const CreateUserModal = ({
     } else {
       updateUser(dispatch, values)
         .then((res) => {
-          handleCancel();
-          message.success("유저기 성공적으로 수정되었습니다.");
+          setIsModalVisible(false);
+          message.success("유저가 성공적으로 수정되었습니다.");
         })
         .catch((err) => {
           throw err;
@@ -71,6 +69,7 @@ const CreateUserModal = ({
       centered
       onCancel={handleCancel}
       footer={null}
+      forceRender
     >
       <Form
         form={form}
