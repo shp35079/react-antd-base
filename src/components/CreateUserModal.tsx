@@ -34,6 +34,11 @@ const CreateUserModal = ({
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    if (modalType === "add") {
+      form.resetFields();
+    } else {
+      form.setFieldsValue(user);
+    }
   };
 
   const onFinish = (values: UserListType) => {
