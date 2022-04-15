@@ -17,7 +17,7 @@ interface Props {
   modalType: string;
 }
 
-const CreateUserModal = ({
+const FetchUserModal = ({
   isModalVisible,
   setIsModalVisible,
   modalType,
@@ -122,4 +122,4 @@ const ButtonWrapper = styled.div`
   gap: 20px;
 `;
 
-export default CreateUserModal;
+export default FetchUserModal;

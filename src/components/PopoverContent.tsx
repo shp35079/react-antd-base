@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import CreateUserModal from "./CreateUserModal";
+import FetchUserModal from "./FetchUserModal";
 import DetailUserModal from "./DetailUserModal";
 
 interface Props {
@@ -32,7 +32,7 @@ const PopoverContent = ({ setIsPopoverVisible }: Props) => {
         isModalVisible={isDeatilModalVisible}
         setIsModalVisible={setIsDeatilModalVisible}
       />
-      <CreateUserModal
+      <FetchUserModal
         isModalVisible={isUpdateModalVisible}
         setIsModalVisible={setIsUpdateModalVisible}
         modalType="update"
