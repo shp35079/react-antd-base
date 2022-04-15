@@ -1,18 +1,30 @@
 import { Popover } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { setTargetId, UserDispatchContext } from "../contexts";
+import { UserListType } from "../lib/interfaces";
 import PopoverContent from "./PopoverContent";
 
-const PopoverButton = () => {
+interface Props {
+  data: UserListType;
+}
+
+const PopoverButton = ({ data }: Props) => {
+  const dispatch = useContext(UserDispatchContext);
+
   return (
-    <ImageBox>
-      <Popover placement="bottomRight" content={PopoverContent} trigger="click">
+    <Popover
+      placement="bottomRight"
+      content={<PopoverContent />}
+      trigger="click"
+    >
+      <ImageBox onClick={() => setTargetId(dispatch, data.id)}>
         <img
           src="https://ivandjorgon.github.io/youtube-replica/assets/images/dots.png"
           alt=""
         />
-      </Popover>
-    </ImageBox>
+      </ImageBox>
+    </Popover>
   );
 };
 
