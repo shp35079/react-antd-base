@@ -5,10 +5,12 @@ import { UserListType } from "../lib/interfaces";
 interface UserState {
   userList: UserListType[];
   user: UserListType;
+  targetId: number;
 }
 
 type Action =
   | { type: "GET_USER_LIST"; payload: UserListType[] }
+  | { type: "SET_TARGET_ID"; payload: number }
   | { type: "GET_USER"; payload: UserListType }
   | { type: "CREATE_USER"; payload: UserListType }
   | { type: "UPDATE_USER" }
@@ -23,6 +25,7 @@ const initialState: UserState = {
     company: "",
     jobTitle: "",
   },
+  targetId: -1,
 };
 
 export const UserStateContext = createContext<UserState>(initialState);
@@ -50,6 +53,11 @@ const UserReducer = (state: UserState, action: Action): UserState => {
       return {
         ...state,
         userList: action.payload,
+      };
+    case "SET_TARGET_ID":
+      return {
+        ...state,
+        targetId: action.payload,
       };
     case "GET_USER":
       return {
@@ -109,4 +117,8 @@ export async function createUser(
     .catch((err) => {
       throw err;
     });
+}
+
+export function setTargetId(dispatch: Dispatch<Action>, id: number) {
+  dispatch({ type: "SET_TARGET_ID", payload: id });
 }
