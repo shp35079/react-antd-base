@@ -1,4 +1,5 @@
 import PopoverButton from "../components/PopoverButton";
+import { UserListType } from "../lib/interfaces";
 
 export const TABLE_COLUMN = [
   {
@@ -29,7 +30,7 @@ export const TABLE_COLUMN = [
     title: "",
     dataIndex: "menu",
     key: "menu",
-    render: () => PopoverButton(),
+    render: (row: any, record: UserListType) => <PopoverButton data={record} />,
   },
 ];
 
