@@ -37,17 +37,21 @@ export const FORM_ITEM_INFO = [
   {
     label: "이름",
     name: "name",
+    rules: [{ required: true }],
   },
   {
     label: "소속",
     name: "company",
+    rules: [{ required: true }],
   },
   {
     label: "이메일",
     name: "email",
+    rules: [{ required: true, type: "email" }],
   },
   {
     label: "직함",
     name: "jobTitle",
+    rules: [{ required: true }],
   },
 ];

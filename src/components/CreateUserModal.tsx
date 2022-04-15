@@ -1,4 +1,5 @@
 import { Form, Input, Modal, Button, message } from "antd";
+import { Rule } from "antd/lib/form";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import styled from "styled-components";
 import { FORM_ITEM_INFO } from "../constances";
@@ -57,7 +58,7 @@ const CreateUserModal = ({
               colon={false}
               label={ele.label}
               name={ele.name}
-              rules={[{ required: true }]}
+              rules={ele.rules as Rule[]}
             >
               <Input />
             </Form.Item>
