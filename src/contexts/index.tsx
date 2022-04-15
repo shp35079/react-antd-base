@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from "react";
-import { create, fetchById, fetchList, update } from "../lib/api";
+import { create, deleteById, fetchById, fetchList, update } from "../lib/api";
 import { UserListType } from "../lib/interfaces";
 
 interface UserState {
@@ -76,6 +76,11 @@ const UserReducer = (state: UserState, action: Action): UserState => {
             : ele
         ),
       };
+    case "DELETE_USER":
+      return {
+        ...state,
+        userList: state.userList.filter((ele) => ele.id !== state.user.id),
+      };
     default:
       throw new Error("Unhandled action");
   }
@@ -137,6 +142,16 @@ export async function updateUser(
   await update(data)
     .then((res) => {
       dispatch({ type: "UPDATE_USER", payload: res as UserListType });
+    })
+    .catch((err) => {
+      throw err;
+    });
+}
+
+export async function deleteUser(dispatch: Dispatch<Action>, id: number) {
+  await deleteById(id)
+    .then((res) => {
+      dispatch({ type: "DELETE_USER", payload: id });
     })
     .catch((err) => {
       throw err;
