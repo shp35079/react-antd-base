@@ -7,6 +7,10 @@ interface UserState {
   user: UserListType;
 }
 
+interface UserProviderProps {
+  children: JSX.Element | JSX.Element[];
+}
+
 type Action =
   | { type: "GET_USER_LIST"; payload: UserListType[] }
   | { type: "SET_USER"; payload: UserListType }
@@ -29,11 +33,7 @@ const initialState: UserState = {
 export const UserStateContext = createContext<UserState>(initialState);
 export const UserDispatchContext = createContext<Dispatch<Action>>(() => null);
 
-interface Props {
-  children: JSX.Element | JSX.Element[];
-}
-
-export const UserProvider = ({ children }: Props) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   return (
