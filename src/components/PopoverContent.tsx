@@ -38,7 +38,7 @@ const PopoverContent = ({ setIsPopoverVisible }: PopoverContentProps) => {
       centered: true,
       onOk() {
         deleteUser(dispatch, user.id)
-          .then((res) => {
+          .then(() => {
             message.success("유저가 성공적으로 삭제되었습니다.");
           })
           .catch((err) => {

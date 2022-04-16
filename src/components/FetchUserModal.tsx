@@ -41,7 +41,7 @@ const FetchUserModal = ({
   const onFinish = (values: UserListType) => {
     if (modalType === "add") {
       createUser(dispatch, values)
-        .then((res) => {
+        .then(() => {
           setIsModalVisible(false);
           message.success("유저가 성공적으로 추가되었습니다.");
           form.resetFields();
@@ -51,7 +51,7 @@ const FetchUserModal = ({
         });
     } else {
       updateUser(dispatch, values)
-        .then((res) => {
+        .then(() => {
           setIsModalVisible(false);
           message.success("유저가 성공적으로 수정되었습니다.");
         })
