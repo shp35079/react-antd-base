@@ -87,48 +87,44 @@ const UserReducer = (state: UserState, action: Action): UserState => {
 };
 
 export const getUserList = async (dispatch: Dispatch<Action>) => {
-  await fetchList()
-    .then((res) => {
-      dispatch({
-        type: "GET_USER_LIST",
-        payload: (res as UserListType[]).map((user) => {
-          return {
-            ...user,
-            key: user.id,
-          };
-        }),
-      });
-    })
-    .catch((err) => {
-      throw err;
+  try {
+    const res = await fetchList();
+    dispatch({
+      type: "GET_USER_LIST",
+      payload: (res as UserListType[]).map((user) => {
+        return {
+          ...user,
+          key: user.id,
+        };
+      }),
     });
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const getUser = async (dispatch: Dispatch<Action>, id: number) => {
-  await fetchById(id)
-    .then((res) => {
-      dispatch({ type: "GET_USER", payload: res as UserListType });
-    })
-    .catch((err) => {
-      throw err;
-    });
+  try {
+    const res = await fetchById(id);
+    dispatch({ type: "GET_USER", payload: res as UserListType });
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const createUser = async (
   dispatch: Dispatch<Action>,
   data: UserListType
 ) => {
-  await create(data)
-    .then((res) => {
-      const userInfo = res as UserListType;
-      dispatch({
-        type: "CREATE_USER",
-        payload: { ...userInfo, key: userInfo.id },
-      });
-    })
-    .catch((err) => {
-      throw err;
+  try {
+    const res = (await create(data)) as UserListType;
+    dispatch({
+      type: "CREATE_USER",
+      payload: { ...res, key: res.id },
     });
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const setUser = (dispatch: Dispatch<Action>, user: UserListType) => {
@@ -139,21 +135,19 @@ export const updateUser = async (
   dispatch: Dispatch<Action>,
   data: UserListType
 ) => {
-  await update(data)
-    .then((res) => {
-      dispatch({ type: "UPDATE_USER", payload: res as UserListType });
-    })
-    .catch((err) => {
-      throw err;
-    });
+  try {
+    const res = await update(data);
+    dispatch({ type: "UPDATE_USER", payload: res as UserListType });
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const deleteUser = async (dispatch: Dispatch<Action>, id: number) => {
-  await deleteById(id)
-    .then((res) => {
-      dispatch({ type: "DELETE_USER", payload: res as number });
-    })
-    .catch((err) => {
-      throw err;
-    });
+  try {
+    const res = await deleteById(id);
+    dispatch({ type: "DELETE_USER", payload: res as number });
+  } catch (err) {
+    throw err;
+  }
 };
