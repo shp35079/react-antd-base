@@ -151,7 +151,7 @@ export async function updateUser(
 export async function deleteUser(dispatch: Dispatch<Action>, id: number) {
   await deleteById(id)
     .then((res) => {
-      dispatch({ type: "DELETE_USER", payload: id });
+      dispatch({ type: "DELETE_USER", payload: res as number });
     })
     .catch((err) => {
       throw err;
