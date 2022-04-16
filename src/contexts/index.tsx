@@ -70,16 +70,16 @@ const UserReducer = (state: UserState, action: Action): UserState => {
     case "UPDATE_USER":
       return {
         ...state,
-        userList: state.userList.map((ele) =>
-          ele.id === state.user.id
+        userList: state.userList.map((user) =>
+          user.id === state.user.id
             ? { ...action.payload, id: state.user.id, key: state.user.id }
-            : ele
+            : user
         ),
       };
     case "DELETE_USER":
       return {
         ...state,
-        userList: state.userList.filter((ele) => ele.id !== state.user.id),
+        userList: state.userList.filter((user) => user.id !== state.user.id),
       };
     default:
       throw new Error("Unhandled action");
@@ -91,10 +91,10 @@ export async function getUserList(dispatch: Dispatch<Action>) {
     .then((res) => {
       dispatch({
         type: "GET_USER_LIST",
-        payload: (res as UserListType[]).map((ele) => {
+        payload: (res as UserListType[]).map((user) => {
           return {
-            ...ele,
-            key: ele.id,
+            ...user,
+            key: user.id,
           };
         }),
       });
