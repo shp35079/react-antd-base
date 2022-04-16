@@ -78,14 +78,15 @@ const FetchUserModal = ({
         wrapperCol={{ span: 16 }}
         onFinish={onFinish}
       >
-        {FORM_ITEM_INFO.map((ele) => {
+        {FORM_ITEM_INFO.map((item) => {
+          const { name, label, rules } = item;
           return (
             <Form.Item
-              key={ele.name}
+              key={name}
               colon={false}
-              label={ele.label}
-              name={ele.name}
-              rules={ele.rules as Rule[]}
+              label={label}
+              name={name}
+              rules={rules as Rule[]}
             >
               <Input />
             </Form.Item>
