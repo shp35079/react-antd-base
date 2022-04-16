@@ -14,7 +14,7 @@ import { UserListType } from "../interfaces";
 interface FetchUserModalProps {
   isModalVisible: boolean;
   setIsModalVisible: Dispatch<SetStateAction<boolean>>;
-  modalType: string;
+  modalType: "add" | "update";
 }
 
 const FetchUserModal = ({
