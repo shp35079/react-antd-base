@@ -28,7 +28,7 @@ const PopoverButton = ({ data }: Props) => {
       <ImageBox onClick={() => setUser(dispatch, data)}>
         <img
           src="https://ivandjorgon.github.io/youtube-replica/assets/images/dots.png"
-          alt=""
+          alt="see more icon with three dots"
         />
       </ImageBox>
     </Popover>
