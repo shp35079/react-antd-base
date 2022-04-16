@@ -5,11 +5,11 @@ import { setUser, UserDispatchContext } from "../contexts";
 import { UserListType } from "../lib/interfaces";
 import PopoverContent from "./PopoverContent";
 
-interface Props {
+interface PopoverButtonProps {
   data: UserListType;
 }
 
-const PopoverButton = ({ data }: Props) => {
+const PopoverButton = ({ data }: PopoverButtonProps) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const dispatch = useContext(UserDispatchContext);
 

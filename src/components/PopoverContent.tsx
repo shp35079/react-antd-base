@@ -6,11 +6,11 @@ import { message, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { deleteUser, UserDispatchContext, UserStateContext } from "../contexts";
 
-interface Props {
+interface PopoverContentProps {
   setIsPopoverVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const PopoverContent = ({ setIsPopoverVisible }: Props) => {
+const PopoverContent = ({ setIsPopoverVisible }: PopoverContentProps) => {
   const [isDeatilModalVisible, setIsDeatilModalVisible] = useState(false);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
   const { user } = useContext(UserStateContext);

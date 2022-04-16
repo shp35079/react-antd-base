@@ -11,7 +11,7 @@ import {
 } from "../contexts";
 import { UserListType } from "../lib/interfaces";
 
-interface Props {
+interface FetchUserModalProps {
   isModalVisible: boolean;
   setIsModalVisible: Dispatch<SetStateAction<boolean>>;
   modalType: string;
@@ -21,7 +21,7 @@ const FetchUserModal = ({
   isModalVisible,
   setIsModalVisible,
   modalType,
-}: Props) => {
+}: FetchUserModalProps) => {
   const [form] = Form.useForm();
   const { user } = useContext(UserStateContext);
   const dispatch = useContext(UserDispatchContext);
