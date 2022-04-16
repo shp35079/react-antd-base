@@ -86,7 +86,7 @@ const UserReducer = (state: UserState, action: Action): UserState => {
   }
 };
 
-export async function getUserList(dispatch: Dispatch<Action>) {
+export const getUserList = async (dispatch: Dispatch<Action>) => {
   await fetchList()
     .then((res) => {
       dispatch({
@@ -102,9 +102,9 @@ export async function getUserList(dispatch: Dispatch<Action>) {
     .catch((err) => {
       throw err;
     });
-}
+};
 
-export async function getUser(dispatch: Dispatch<Action>, id: number) {
+export const getUser = async (dispatch: Dispatch<Action>, id: number) => {
   await fetchById(id)
     .then((res) => {
       dispatch({ type: "GET_USER", payload: res as UserListType });
@@ -112,12 +112,12 @@ export async function getUser(dispatch: Dispatch<Action>, id: number) {
     .catch((err) => {
       throw err;
     });
-}
+};
 
-export async function createUser(
+export const createUser = async (
   dispatch: Dispatch<Action>,
   data: UserListType
-) {
+) => {
   await create(data)
     .then((res) => {
       const userInfo = res as UserListType;
@@ -129,16 +129,16 @@ export async function createUser(
     .catch((err) => {
       throw err;
     });
-}
+};
 
-export function setUser(dispatch: Dispatch<Action>, user: UserListType) {
+export const setUser = (dispatch: Dispatch<Action>, user: UserListType) => {
   dispatch({ type: "SET_USER", payload: user });
-}
+};
 
-export async function updateUser(
+export const updateUser = async (
   dispatch: Dispatch<Action>,
   data: UserListType
-) {
+) => {
   await update(data)
     .then((res) => {
       dispatch({ type: "UPDATE_USER", payload: res as UserListType });
@@ -146,9 +146,9 @@ export async function updateUser(
     .catch((err) => {
       throw err;
     });
-}
+};
 
-export async function deleteUser(dispatch: Dispatch<Action>, id: number) {
+export const deleteUser = async (dispatch: Dispatch<Action>, id: number) => {
   await deleteById(id)
     .then((res) => {
       dispatch({ type: "DELETE_USER", payload: res as number });
@@ -156,4 +156,4 @@ export async function deleteUser(dispatch: Dispatch<Action>, id: number) {
     .catch((err) => {
       throw err;
     });
-}
+};
