@@ -26,7 +26,7 @@ const PopoverContent = ({ setIsPopoverVisible }: PopoverContentProps) => {
     setIsUpdateModalVisible(true);
   };
 
-  function openDeleteModal() {
+  const openDeleteModal = () => {
     setIsPopoverVisible(false);
     Modal.confirm({
       title: "정말 삭제하시겠습니까?",
@@ -41,12 +41,12 @@ const PopoverContent = ({ setIsPopoverVisible }: PopoverContentProps) => {
           .then(() => {
             message.success("유저가 성공적으로 삭제되었습니다.");
           })
-          .catch((err) => {
-            throw err;
+          .catch(() => {
+            message.error("유저 삭제에 실패했습니다.");
           });
       },
     });
-  }
+  };
 
   return (
     <>

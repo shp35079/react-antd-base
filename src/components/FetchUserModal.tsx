@@ -44,8 +44,8 @@ const FetchUserModal = ({
           message.success("유저가 성공적으로 추가되었습니다.");
           form.resetFields();
         })
-        .catch((err) => {
-          throw err;
+        .catch(() => {
+          message.error("유저 추가에 실패했습니다.");
         });
     } else {
       updateUser(dispatch, values)
@@ -53,8 +53,8 @@ const FetchUserModal = ({
           setIsModalVisible(false);
           message.success("유저가 성공적으로 수정되었습니다.");
         })
-        .catch((err) => {
-          throw err;
+        .catch(() => {
+          message.error("유저 수정에 실패했습니다.");
         });
     }
   };
