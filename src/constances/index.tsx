@@ -1,5 +1,5 @@
 import PopoverButton from "../components/PopoverButton";
-import { UserListType } from "../lib/interfaces";
+import { UserListType } from "../interfaces";
 
 export const TABLE_COLUMN = [
   {

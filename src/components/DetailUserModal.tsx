@@ -3,12 +3,15 @@ import React, { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { getUser, UserDispatchContext, UserStateContext } from "../contexts";
 
-interface Props {
+interface DetailUserModalProps {
   isModalVisible: boolean;
   setIsModalVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const DetailUserModal = ({ isModalVisible, setIsModalVisible }: Props) => {
+const DetailUserModal = ({
+  isModalVisible,
+  setIsModalVisible,
+}: DetailUserModalProps) => {
   const { user } = useContext(UserStateContext);
   const dispatch = useContext(UserDispatchContext);
 

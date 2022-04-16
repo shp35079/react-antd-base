@@ -6,11 +6,11 @@ import { message, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { deleteUser, UserDispatchContext, UserStateContext } from "../contexts";
 
-interface Props {
+interface PopoverContentProps {
   setIsPopoverVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const PopoverContent = ({ setIsPopoverVisible }: Props) => {
+const PopoverContent = ({ setIsPopoverVisible }: PopoverContentProps) => {
   const [isDeatilModalVisible, setIsDeatilModalVisible] = useState(false);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
   const { user } = useContext(UserStateContext);
@@ -26,7 +26,7 @@ const PopoverContent = ({ setIsPopoverVisible }: Props) => {
     setIsUpdateModalVisible(true);
   };
 
-  function openDeleteModal() {
+  const openDeleteModal = () => {
     setIsPopoverVisible(false);
     Modal.confirm({
       title: "정말 삭제하시겠습니까?",
@@ -38,15 +38,15 @@ const PopoverContent = ({ setIsPopoverVisible }: Props) => {
       centered: true,
       onOk() {
         deleteUser(dispatch, user.id)
-          .then((res) => {
+          .then(() => {
             message.success("유저가 성공적으로 삭제되었습니다.");
           })
-          .catch((err) => {
-            throw err;
+          .catch(() => {
+            message.error("유저 삭제에 실패했습니다.");
           });
       },
     });
-  }
+  };
 
   return (
     <>

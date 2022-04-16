@@ -7,12 +7,12 @@ const MainHeader = () => {
     <Wrapper>
       <img
         src="https://assets-global.website-files.com/618a0db0508e1a1f3a4061ef/622eceba0154efe8e5cb294e_logo_color.png"
-        alt=""
+        alt="quotaBook Logo"
       />
       <UserBox>
         <img
           src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
-          alt=""
+          alt="profile icon with one person"
         />
         <span>박성현</span>
       </UserBox>

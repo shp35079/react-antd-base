@@ -2,14 +2,14 @@ import { Popover } from "antd";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { setUser, UserDispatchContext } from "../contexts";
-import { UserListType } from "../lib/interfaces";
+import { UserListType } from "../interfaces";
 import PopoverContent from "./PopoverContent";
 
-interface Props {
+interface PopoverButtonProps {
   data: UserListType;
 }
 
-const PopoverButton = ({ data }: Props) => {
+const PopoverButton = ({ data }: PopoverButtonProps) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const dispatch = useContext(UserDispatchContext);
 
@@ -28,7 +28,7 @@ const PopoverButton = ({ data }: Props) => {
       <ImageBox onClick={() => setUser(dispatch, data)}>
         <img
           src="https://ivandjorgon.github.io/youtube-replica/assets/images/dots.png"
-          alt=""
+          alt="see more icon with three dots"
         />
       </ImageBox>
     </Popover>

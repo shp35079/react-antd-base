@@ -9,27 +9,25 @@ import {
   UserDispatchContext,
   UserStateContext,
 } from "../contexts";
-import { UserListType } from "../lib/interfaces";
+import { UserListType } from "../interfaces";
 
-interface Props {
+interface FetchUserModalProps {
   isModalVisible: boolean;
   setIsModalVisible: Dispatch<SetStateAction<boolean>>;
-  modalType: string;
+  modalType: "add" | "update";
 }
 
 const FetchUserModal = ({
   isModalVisible,
   setIsModalVisible,
   modalType,
-}: Props) => {
+}: FetchUserModalProps) => {
   const [form] = Form.useForm();
   const { user } = useContext(UserStateContext);
   const dispatch = useContext(UserDispatchContext);
 
   useEffect(() => {
-    if (modalType === "update") {
-      form.setFieldsValue(user);
-    }
+    if (modalType === "update") form.setFieldsValue(user);
   }, []);
 
   const handleCancel = () => {
@@ -41,22 +39,22 @@ const FetchUserModal = ({
   const onFinish = (values: UserListType) => {
     if (modalType === "add") {
       createUser(dispatch, values)
-        .then((res) => {
+        .then(() => {
           setIsModalVisible(false);
           message.success("유저가 성공적으로 추가되었습니다.");
           form.resetFields();
         })
-        .catch((err) => {
-          throw err;
+        .catch(() => {
+          message.error("유저 추가에 실패했습니다.");
         });
     } else {
       updateUser(dispatch, values)
-        .then((res) => {
+        .then(() => {
           setIsModalVisible(false);
           message.success("유저가 성공적으로 수정되었습니다.");
         })
-        .catch((err) => {
-          throw err;
+        .catch(() => {
+          message.error("유저 수정에 실패했습니다.");
         });
     }
   };
@@ -78,14 +76,15 @@ const FetchUserModal = ({
         wrapperCol={{ span: 16 }}
         onFinish={onFinish}
       >
-        {FORM_ITEM_INFO.map((ele) => {
+        {FORM_ITEM_INFO.map((item) => {
+          const { name, label, rules } = item;
           return (
             <Form.Item
-              key={ele.name}
+              key={name}
               colon={false}
-              label={ele.label}
-              name={ele.name}
-              rules={ele.rules as Rule[]}
+              label={label}
+              name={name}
+              rules={rules as Rule[]}
             >
               <Input />
             </Form.Item>
