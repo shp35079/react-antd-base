@@ -27,9 +27,7 @@ const FetchUserModal = ({
   const dispatch = useContext(UserDispatchContext);
 
   useEffect(() => {
-    if (modalType === "update") {
-      form.setFieldsValue(user);
-    }
+    if (modalType === "update") form.setFieldsValue(user);
   }, []);
 
   const handleCancel = () => {
