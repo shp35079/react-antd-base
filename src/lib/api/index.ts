@@ -1,5 +1,5 @@
 import faker from "@faker-js/faker";
-import { UserListType } from "../interfaces";
+import { UserListType } from "../../interfaces";
 
 function makeDummyData(count: number) {
   const dummyData = [];

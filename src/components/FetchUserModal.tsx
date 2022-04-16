@@ -9,7 +9,7 @@ import {
   UserDispatchContext,
   UserStateContext,
 } from "../contexts";
-import { UserListType } from "../lib/interfaces";
+import { UserListType } from "../interfaces";
 
 interface FetchUserModalProps {
   isModalVisible: boolean;

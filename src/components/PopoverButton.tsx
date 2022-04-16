@@ -2,7 +2,7 @@ import { Popover } from "antd";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { setUser, UserDispatchContext } from "../contexts";
-import { UserListType } from "../lib/interfaces";
+import { UserListType } from "../interfaces";
 import PopoverContent from "./PopoverContent";
 
 interface PopoverButtonProps {

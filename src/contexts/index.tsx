@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, useReducer } from "react";
 import { create, deleteById, fetchById, fetchList, update } from "../lib/api";
-import { UserListType } from "../lib/interfaces";
+import { UserListType } from "../interfaces";
 
 interface UserState {
   userList: UserListType[];
